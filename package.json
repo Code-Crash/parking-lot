@@ -4,6 +4,7 @@
   "description": "This application will demonstrate the use of parking lot with the help of input commands or the commands list as a file",
   "main": "index.js",
   "scripts": {
+    "start": "node .",
     "test": "mocha"
   },
   "keywords": [

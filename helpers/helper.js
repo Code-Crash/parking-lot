@@ -122,6 +122,7 @@ const getPrice = (hours) => {
  * @returns (PositiveNumber > 0 || error)
  */
 const slotNumber = (slot) => {
+    if (!slot) { throw 'Enter Total Slots You Want!'; }
     if (slot.constructor === String) {
         if (slot === '0') {
             throw 'You can\'t allocate 0 size slots.'
@@ -154,10 +155,12 @@ const park = (size, slots, vehicle) => {
         throw `Before parking the vehicle, please allocate the slots to your parking lot.`;
     }
 
-    //TODO: Add one more, to check with same vehicle number is allocated to any slot or not, if yes, throw error
-
     if (!vehicle.number || !vehicle.color || !vehicle.type) {
         throw `While parking the vehicle, we required vehicle details like number, color, and type.`
+    }
+
+    if (findVehicle(vehicle.number, slots)) {
+        throw `Oops, it's look like there is already vehicle is parked with number ${vehicle.number}.`;
     }
 
     if (!first(slots)) {
@@ -184,7 +187,7 @@ const status = (size, slots) => {
     }
 
     if (filled(slots).length === 0) {
-        throw `Oops, no booked parking lot found!`;
+        throw `Oops, no booked vehicle lot found!`;
     }
 
     return filled(slots);
@@ -204,7 +207,7 @@ const leave = (size, slots, number) => {
     }
 
     if (filled(slots).length === 0) {
-        throw `Oops, no booked parking lot found!`;
+        throw `Oops, no booked vehicle lot found!`;
     }
 
     if (!findVehicle(number, slots)) {
@@ -221,6 +224,7 @@ const leave = (size, slots, number) => {
  * @returns {NumberHours || Error}
  */
 const hoursNumber = (hours) => {
+    if (!hours) { throw 'Enter Total Duration of Parking'; }
     if (hours.constructor === String) {
         if (hours === '0') {
             throw 'You can\'t allocate 0 size hours.'
@@ -230,7 +234,7 @@ const hoursNumber = (hours) => {
             return parseInt(hours);
         }
     } else if (hours.constructor === Number) {
-        if (hours === 0) {
+        if (hours == 0) {
             throw 'You can\'t allocate 0 size hours.'
         } else if (Math.sign(hours) === -1) {
             throw 'You can\'t allocate negative size hours.'

@@ -1,5 +1,10 @@
 'use strict';
 
+/**
+ * @author code-crash
+ * @description This Parking Manager is contains the command APIs which will manage the Parking 
+ */
+
 const util = require('../helpers');
 
 
@@ -41,6 +46,7 @@ class ParkingManager {
                 parkAt: new Date().getTime(),
             }
             util.logger.info(`Parked vehicle: ${JSON.stringify(this.available[slot])}`);
+            util.logger.info(`Available Slots are ${JSON.stringify(util.helper.available(this.available))}`);
             return `Allocated slot number: ${slot}`;
         } catch (error) {
             util.logger.error(JSON.stringify(error));
@@ -62,7 +68,7 @@ class ParkingManager {
                 log.push({ slot: slot, number: lot.number.toUpperCase(), color: lot.color, type: lot.type, parkedAt: new Date(lot.parkAt) });
             });
             util.logger.info(`Access Status: ${JSON.stringify(log)}`);
-            return console.table(log);
+            return log;
         } catch (error) {
             util.logger.error(JSON.stringify(error));
             return error;
@@ -82,6 +88,7 @@ class ParkingManager {
             let charge = util.helper.getPrice(hours);
             this.available[slot.lot] = null;
             util.logger.info(`Registration number ${slot.vehicle.number.toUpperCase()} with Slot Number ${slot.lot} is free with Charge ${charge.price} ${charge.duration}`);
+            util.logger.info(`Available Slots are ${JSON.stringify(util.helper.available(this.available))}`);
             return `Registration number ${slot.vehicle.number.toUpperCase()} with Slot Number ${slot.lot} is free with Charge ${charge.price} ${charge.duration}`;
         } catch (error) {
             util.logger.error(JSON.stringify(error));
@@ -94,15 +101,15 @@ class ParkingManager {
 const pm = new ParkingManager(); // singleton class
 module.exports = pm;
 
-console.log(pm.allocate(5));
-console.log(pm.park({ number: 'MH-20', color: 'red', type: 'car' }));
-console.log(pm.park({ number: 'MH-30', color: 'red', type: 'car' }));
-console.log(pm.park({ number: 'MH-40', color: 'red', type: 'car' }));
-console.log(util.helper.available(pm.available));
-console.log(util.helper.first(pm.available));
-console.log(pm.status());
-console.log(pm.leave('MH-20', 2));
-console.log(pm.status());
-console.log(pm.leave('MH-30', 10));
-console.log(pm.leave('MH-40', 1));
-console.log(util.helper.available(pm.available));
+// console.log(pm.allocate(5));
+// console.log(pm.park({ number: 'MH-20', color: 'red', type: 'car' }));
+// console.log(pm.park({ number: 'MH-30', color: 'red', type: 'car' }));
+// console.log(pm.park({ number: 'MH-40', color: 'red', type: 'car' }));
+// console.log(util.helper.available(pm.available));
+// console.log(util.helper.first(pm.available));
+// console.log(pm.status());
+// console.log(pm.leave('MH-20', 2));
+// console.log(pm.status());
+// console.log(pm.leave('MH-30', 10));
+// console.log(pm.leave('MH-40', 1));
+// console.log(util.helper.available(pm.available));

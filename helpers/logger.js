@@ -1,13 +1,14 @@
 'use strict';
 
+/**
+ * @author code-crash
+ * @description This file is help to maintain the history of commands, activity, and errors by using file system
+ */
+
 const fs = require('fs');
 const config = require('../config');
 
 class Logger {
-
-    constructor() {
-        this.console = true;
-    };
 
     /**
      * @description File writer, which will write the text into the file

@@ -49,7 +49,7 @@ $ bin/parking_lot file_inputs.txt
 
 * Create parking lot of size n : create_parking_lot
 {capacity}
-* Park a car : park {car_number}
+* Park a car : park {car_number} {color} {type}
 * Remove(Unpark) car from : leave {car_number} {hours}
 * Print status of parking slot : status
 
