@@ -1,12 +1,10 @@
 'use strict';
 
-const validator = require('./validators');
-const convertor = require('./convertor');
+const helper = require('./helper');
 const logger = require('./logger');
 
 
 module.exports = {
-    validator: validator,
-    convertor: convertor,
+    helper: helper,
     logger: logger
 };

@@ -19,7 +19,7 @@ const DURATION_UNIT = {
  * @description Charge constant will be responsible for handling the charges/vehicle for a specific duration
  */
 const charge = {
-    currency: [{ default: true, name: 'us-dollar', symbol: '$' }],
+    currency: { name: 'us-dollar', symbol: '$' },
     default: {
         fee: 10,
         duration: {
