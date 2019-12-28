@@ -41,7 +41,7 @@ const charge = {
  * @description The job of enable to hold the boolean value to do or not do the operation
  */
 const enabler = {
-    CONSOLE: true,
+    CONSOLE: false,
     VEHICLES: ['car'], // It will hold the type of vehicle to park, if vehicle type is not defined here, it will not park the vehicle
 }
 

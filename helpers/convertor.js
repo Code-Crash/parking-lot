@@ -57,9 +57,22 @@ const first = (slots) => {
     });
 };
 
+/**
+ * @description This function will return the number of booked slit with there position
+ * @param {*} slots 
+ * 
+ * @returns {ArrayOfStringKey}
+ */
+const filled = (slots) => {
+    return Object.keys(slots || {}).filter((key) => {
+        return slots[key];
+    });
+}
+
 module.exports = {
     filler: filler,
     sizeOf: sizeOf,
     available: available,
-    first: first
+    first: first,
+    filled: filled
 }

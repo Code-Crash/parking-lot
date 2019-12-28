@@ -19,9 +19,9 @@ class Logger {
             fs.mkdirSync('./logs');
         }
         if (type === 'info') {
-            fs.appendFile(__dirname + '/../logs/info.log', new Date().getTime() + ':' + text + '\n', function (error) { if (error) { console.log(error); } });
+            fs.appendFile(__dirname + '/../logs/info.log', text + '\n', function (error) { if (error) { console.log(error); } });
         } else {
-            fs.appendFile(__dirname + '/../logs/error.log', new Date().getTime() + ':' + text + '\n', function (error) { if (error) { console.log(error); } });
+            fs.appendFile(__dirname + '/../logs/error.log', text + '\n', function (error) { if (error) { console.log(error); } });
         }
     }
 
@@ -30,6 +30,7 @@ class Logger {
      * @param {*} text 
      */
     static info(text) {
+        text = 'info ' + new Date().getTime() + ': ' + text;
         if (config.enabler.CONSOLE) {
             console.log(text);
         }
@@ -41,6 +42,7 @@ class Logger {
      * @param {*} text 
      */
     static error(text) {
+        text = 'error ' + new Date().getTime() + ': ' + text;
         if (config.enabler.CONSOLE) {
             console.error(text);
         }

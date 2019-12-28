@@ -29,7 +29,14 @@ const slotNumber = (slot) => {
     }
 }
 
-
+/**
+ * @description This function will do the basic validation before parking the vehicle
+ * @param {*} size 
+ * @param {*} slots 
+ * @param {*} type 
+ * 
+ * @returns {FirstAvailableSlotString || Error}
+ */
 const park = (size, slots, type) => {
     if (size === 0) {
         throw `Before parking the vehicle, please allocate the slots to your parking lot.`;
@@ -47,7 +54,27 @@ const park = (size, slots, type) => {
 
 }
 
+/**
+ * @description This function will return the filled slots with there position in array
+ * @param {*} size 
+ * @param {*} slots 
+ * 
+ * @returns {FilledSlotsKey || Error}
+ */
+const status = (size, slots) => {
+    if (size === 0) {
+        throw `No Slots, Please allocate the slots to your parking lot.`;
+    }
+
+    if (convertor.filled(slots).length === 0) {
+        throw `Oops, no booked parking lot found!`;
+    }
+
+    return convertor.filled(slots);
+}
+
 module.exports = {
     slotNumber: slotNumber,
     park: park,
+    status: status,
 }
