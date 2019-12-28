@@ -45,8 +45,21 @@ const available = (slots) => {
 };
 
 
+/**
+ * @description This function will help you to get the key of your first available slot.
+ * @param {*} slots 
+ * 
+ * @returns {StringKey}
+ */
+const first = (slots) => {
+    return Object.keys(slots || {}).find((key) => {
+        return !slots[key]
+    });
+};
+
 module.exports = {
     filler: filler,
     sizeOf: sizeOf,
-    available: available
+    available: available,
+    first: first
 }
