@@ -1,0 +1,16 @@
+{
+  "name": "parking-lot",
+  "version": "1.0.0",
+  "description": "This application will demonstrate the use of parking lot with the help of input commands or the commands list as a file",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "parking",
+    "parking-lot",
+    "lot"
+  ],
+  "author": "code-crash <pravintiwari1992@gmail.com>",
+  "license": "MIT"
+}
