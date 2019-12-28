@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node .",
-    "test": "mocha"
+    "setup": "./bin/setup.sh",
+    "test": "mocha",
+    "file": "npm start"
   },
   "keywords": [
     "parking",
@@ -13,5 +15,9 @@
     "lot"
   ],
   "author": "code-crash <pravintiwari1992@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.2.2"
+  }
 }

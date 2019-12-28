@@ -132,7 +132,7 @@ const slotNumber = (slot) => {
             return parseInt(slot);
         }
     } else if (slot.constructor === Number) {
-        if (slot === 0) {
+        if (slot == 0) {
             throw 'You can\'t allocate 0 size slots.'
         } else if (Math.sign(slot) === -1) {
             throw 'You can\'t allocate negative size slots.'
@@ -153,6 +153,10 @@ const slotNumber = (slot) => {
 const park = (size, slots, vehicle) => {
     if (size === 0) {
         throw `Before parking the vehicle, please allocate the slots to your parking lot.`;
+    }
+
+    if (!vehicle || vehicle.constructor != Object) {
+        throw 'While parking the vehicle, vehicle details are required or format should be object.';
     }
 
     if (!vehicle.number || !vehicle.color || !vehicle.type) {
@@ -201,13 +205,17 @@ const status = (size, slots) => {
  * 
  * @returns {VehicleSlotObject || Error}
  */
-const leave = (size, slots, number) => {
+const leave = (size, slots, number, hours) => {
     if (size === 0) {
         throw `No Slots, Please allocate the slots to your parking lot.`;
     }
 
     if (filled(slots).length === 0) {
         throw `Oops, no booked vehicle lot found!`;
+    }
+
+    if (!number || !hours) {
+        throw 'Leave command required two arguments, registration-number: string and hours: number.';
     }
 
     if (!findVehicle(number, slots)) {

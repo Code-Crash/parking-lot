@@ -1,0 +1,11 @@
+create_parking_lot 3
+park KA-01-HH-1234 green car
+park BA-02-HH-3141 red car
+park CA-03-HH-9999 red car
+leave BA-02-HH-3141 4
+status
+park KA-01-P-333 yellow car
+leave KA-01-HH-1234 4
+leave CA-03-HH-9999 6
+park KA-09-HH-0987 black car
+status

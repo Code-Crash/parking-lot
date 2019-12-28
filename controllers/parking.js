@@ -22,12 +22,17 @@ class ParkingManager {
      * @returns {SuccessMessageString || Error}
      */
     allocate(slots) {
-        slots = util.helper.slotNumber(slots);
-        this.total = slots;
-        this.available = util.helper.filler(slots, {});
-        util.logger.info(`Created a parking lot with ${util.helper.sizeOf(this.available)} slots`);
-        util.logger.info(`Available Slots are ${JSON.stringify(util.helper.available(this.available))}`);
-        return `Created parking lot with ${util.helper.sizeOf(this.available)} slots`;
+        try {
+            slots = util.helper.slotNumber(slots);
+            this.total = slots;
+            this.available = util.helper.filler(slots, {});
+            util.logger.info(`Created a parking lot with ${util.helper.sizeOf(this.available)} slots`);
+            util.logger.info(`Available Slots are ${JSON.stringify(util.helper.available(this.available))}`);
+            return `Created parking lot with ${util.helper.sizeOf(this.available)} slots`;
+        } catch (error) {
+            util.logger.error(JSON.stringify(error));
+            throw error;
+        }
     }
 
     /**
@@ -50,7 +55,7 @@ class ParkingManager {
             return `Allocated slot number: ${slot}`;
         } catch (error) {
             util.logger.error(JSON.stringify(error));
-            return error;
+            throw error;
         }
     }
 
@@ -71,7 +76,7 @@ class ParkingManager {
             return log;
         } catch (error) {
             util.logger.error(JSON.stringify(error));
-            return error;
+            throw error;
         }
     }
 
@@ -84,7 +89,7 @@ class ParkingManager {
      */
     leave(number, hours) {
         try {
-            let slot = util.helper.leave(this.total, this.available, number);
+            let slot = util.helper.leave(this.total, this.available, number, hours);
             let charge = util.helper.getPrice(hours);
             this.available[slot.lot] = null;
             util.logger.info(`Registration number ${slot.vehicle.number.toUpperCase()} with Slot Number ${slot.lot} is free with Charge ${charge.price} ${charge.duration}`);
@@ -92,7 +97,7 @@ class ParkingManager {
             return `Registration number ${slot.vehicle.number.toUpperCase()} with Slot Number ${slot.lot} is free with Charge ${charge.price} ${charge.duration}`;
         } catch (error) {
             util.logger.error(JSON.stringify(error));
-            return error;
+            throw error;
         }
     }
 
@@ -100,16 +105,3 @@ class ParkingManager {
 
 const pm = new ParkingManager(); // singleton class
 module.exports = pm;
-
-// console.log(pm.allocate(5));
-// console.log(pm.park({ number: 'MH-20', color: 'red', type: 'car' }));
-// console.log(pm.park({ number: 'MH-30', color: 'red', type: 'car' }));
-// console.log(pm.park({ number: 'MH-40', color: 'red', type: 'car' }));
-// console.log(util.helper.available(pm.available));
-// console.log(util.helper.first(pm.available));
-// console.log(pm.status());
-// console.log(pm.leave('MH-20', 2));
-// console.log(pm.status());
-// console.log(pm.leave('MH-30', 10));
-// console.log(pm.leave('MH-40', 1));
-// console.log(util.helper.available(pm.available));
